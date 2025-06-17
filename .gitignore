@@ -144,3 +144,7 @@ dmypy.json
 # emacs backup saves
 *.~
 *.#
+
+# slurm output files
+*.out
+*.err
