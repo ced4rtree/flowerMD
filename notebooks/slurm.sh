@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH --error=error-logs/hoomd_%j.err
+#SBATCH --error=errors/hoomd_%j.err
 #SBATCH --partition=gpu-l40
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks=1
