@@ -30,8 +30,10 @@ fi
 find_command="find notebooks/logs/ -type f -name \"parameters.txt\" -exec grep -l \"${3}\" {} \;"
 
 for (( i=4; i<=$#; i+=1 )); do
-    find_command+=" | grep -l \"${!i}\""
+    find_command+=" | xargs grep -l \"${!i}\""
 done
 
-find_command+=" | xargs -I {} dirname {}"
-eval $find_command
+find_command+=" | xargs -I {} dirname {} | sort"
+
+echo "$find_command"
+eval "$find_command"
