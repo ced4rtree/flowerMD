@@ -27,7 +27,7 @@ if [ -z $LOG_DIR ] || [ "$#" -lt 3 ]; then
     err_n_die
 fi
 
-find_command="find notebooks/logs/ -type f -name \"parameters.txt\" -exec grep -l \"${3}\" {} \;"
+find_command="find ${LOG_DIR} -type f -name \"parameters.txt\" -exec grep -l \"${3}\" {} \;"
 
 for (( i=4; i<=$#; i+=1 )); do
     find_command+=" | xargs grep -l \"${!i}\""
