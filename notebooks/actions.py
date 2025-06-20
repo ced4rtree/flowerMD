@@ -24,7 +24,7 @@ LOG_FILE_NAME = 'log.txt'
 def run_sim(*jobs):
     for job in jobs:
         # job has already run, pass
-        if job.isfile('trajectory.gsd'):
+        if job.isfile(GSD_FILE_NAME):
             continue
 
         parameters = job.cached_statepoint

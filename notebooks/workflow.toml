@@ -21,7 +21,7 @@ custom = [
 
 [[action]]
 name = "run_sim"
-products = ["trajectory.gsd"]
+products = ["trajectory.gsd", "log.txt"]
 
 [action.resources]
 processes.per_submission = 1
@@ -30,7 +30,15 @@ gpus_per_process = 1
 
 [[action]]
 name = "process_logs"
-products = ["ovito-trajectory.gsd"]
+products = [
+  "ovito-trajectory.gsd",
+  "potential-energy.png",
+  "potential-energy-limited.png",
+  "kinetic-energy.png",
+  "volume.png",
+  "density.png",
+  "temp.png",
+]
 previous_actions = ["run_sim"]
 
 
