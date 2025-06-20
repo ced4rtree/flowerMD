@@ -25,7 +25,7 @@ def get_parameters():
     
         # shrinking parameters
         "density_final": [0.45],
-        "shrink_steps": [1e7],
+        "shrink_steps": [1e5],
         "shrink_kT": [1.0],
         "shrink_tau_kt": [50*dt],
         "shrink_period": [10],

@@ -18,8 +18,8 @@ import unyt as u
 import warnings
 warnings.filterwarnings('ignore')
 
-GSD_FILE_PATH = 'trajectory.gsd'
-LOG_FILE_PATH = 'log.txt'
+GSD_FILE_NAME = 'trajectory.gsd'
+LOG_FILE_NAME = 'log.txt'
 
 def run_sim(*jobs):
     for job in jobs:
@@ -59,9 +59,9 @@ def run_sim(*jobs):
             forcefield=ff.hoomd_forces,
             constraint=rigid_constraint,
             gsd_write_freq=int(5e3),
-            gsd_file_name=GSD_FILE_PATH,
+            gsd_file_name=job.fn(GSD_FILE_NAME),
             log_write_freq=int(5e3),
-            log_file_name=LOG_FILE_PATH,
+            log_file_name=job.fn(LOG_FILE_NAME),
             dt=parameters['dt']
         )
         
@@ -136,14 +136,14 @@ def process_logs(*jobs):
             continue
         
     ellipsoid_gsd(
-        gsd_file=GSD_FILE_PATH,
-        new_file=GSD_FILE_PATH.replace('trajectory.gsd', 'ovito-trajectory.gsd'),
+        gsd_file=job.fn(GSD_FILE_NAME),
+        new_file=job.fn(GSD_FILE_NAME).replace('trajectory.gsd', 'ovito-trajectory.gsd'),
         ellipsoid_types='R',
         lpar=parameters['lpar'],
         lperp=parameters['lperp'],
     )
 
-    log = np.genfromtxt(LOG_FILE_PATH, names=True)
+    log = np.genfromtxt(job.fn(LOG_FILE_NAME), names=True)
     timestep = log["flowermdbasesimulationSimulationtimestep"]
     potential_energy = log["mdcomputeThermodynamicQuantitiespotential_energy"]
     kinetic_energy = log["mdcomputeThermodynamicQuantitieskinetic_energy"]
